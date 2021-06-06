@@ -3,40 +3,41 @@ class AuthorsController < ApplicationController
     authors = Author.all
     render json: authors, status: :ok
   rescue StandardError => e
-    render json: { error: 'Unable to show all authors' }, status: :unprocessable_entity
+    render json: { error: 'Error', message: e.message }, status: :unprocessable_entity
   end
 
   def show
     author = Author.find(params[:id])
     render json: author, status: :ok
   rescue StandardError => e
-    render json: { error: 'Unable to show author' }, status: :unprocessable_entity
+    render json: { error: 'Error', message: e.message }, status: :unprocessable_entity
   end
 
   def create
     author = Author.create!(author_params)
-    render json: author, status: :created
+    render json: { author: author, message: 'created' }, status: :created
   rescue StandardError => e
-    render json: { error: 'Unable to create author' }, status: :unprocessable_entity
+    render json: { error: 'Error', message: e.message }, status: :unprocessable_entity
   end
 
   def update
-    author = Author.find(params[:id]).update(author_params)
-    render status: :ok
+    author = Author.find(params[:id])
+    author.update(author_params)
+    render json: { author: author, message: 'updated' }, status: :created
   rescue StandardError => e
-    render json: { error: 'Unable to update author' }, status: :unprocessable_entity
+    render json: { error: 'Error', message: e.message }, status: :unprocessable_entity
   end
 
-  def destory
+  def destroy
     Author.find(params[:id]).destroy
-    render status: :ok
+    render json: {message: "deleted"}, status: :ok
   rescue StandardError => e
-    render json: { error: 'Unable to update author' }, status: :unprocessable_entity
+    render json: { error: 'Error', message: e.message }, status: :unprocessable_entity
   end
 
   private
 
-  def author__params
+  def author_params
     params.permit(:name, :bio)
   end
 end
