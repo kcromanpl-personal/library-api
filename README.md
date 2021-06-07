@@ -1,24 +1,46 @@
-# README
+# Library API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Beginner's Guide to Rails API
 
-Things you may want to cover:
+## Install
 
-* Ruby version
+### Clone the repository
 
-* System dependencies
+```shell
+git clone git@github.com:kcromanpl-personal/library-api.git
+```
 
-* Configuration
+### Check your Ruby version
 
-* Database creation
+```shell
+ruby -v
+```
 
-* Database initialization
+The output should start with something like `ruby 2.5.1`
 
-* How to run the test suite
+### Install dependencies
 
-* Services (job queues, cache servers, search engines, etc.)
+Using [Bundler](https://github.com/bundler/bundler)
 
-* Deployment instructions
+```shell
+bundle install
+```
 
-* ...
+### Set environment variables
+
+### Initialize the database
+
+```shell
+rails db:create db:migrate db:seed
+```
+
+## Serve
+
+```shell
+rails s
+```
+
+## Console
+```shell
+rails c
+```
